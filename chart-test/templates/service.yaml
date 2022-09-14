@@ -1,0 +1,30 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: dpui-argocd-lb
+  namespace: istio
+  labels:
+    app: dpui-argocd-lb
+  annotations:
+    kubesphere.io/creator: dev1
+    oci.oraclecloud.com/load-balancer-type: lb
+    service.beta.kubernetes.io/oci-load-balancer-internal: 'true'
+  finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+spec:
+  ports:
+    - name: http-80
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: dpui-argocd
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  allocateLoadBalancerNodePorts: true
+  internalTrafficPolicy: Cluster
+
