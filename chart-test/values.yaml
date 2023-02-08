@@ -2,4 +2,4 @@ deployname: dpui-argocd-test
 replicaCount: 1
 images:
   repository: registry.cn-hangzhou.aliyuncs.com/wills-ruoyi/dp-ui
-  tag: v5
+  tag: v6
